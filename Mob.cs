@@ -44,15 +44,15 @@ public partial class Mob : CharacterBody3D
 		Velocity = Velocity.Rotated(Vector3.Up, Rotation.Y);
 	}
 
-	private void OnVisibilityNotifier3DScreenExited()
-	{
-		// We remove the mob from the scene when it exits the screen.
-		QueueFree();
-	}
-	
 	public void Squash()
 	{
 		EmitSignal(SignalName.Squashed);
+		QueueFree();
+	}
+	
+	private void OnVisibilityNotifier3DScreenExited()
+	{
+		// We remove the mob from the scene when it exits the screen.
 		QueueFree();
 	}
 }

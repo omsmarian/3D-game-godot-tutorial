@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://clx5r0ig2ltr4" path="res://Main.cs" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://ceuu150fmggvr" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://defdm2qdva75q" path="res://mob.tscn" id="2_h2yge"]
+[ext_resource type="FontFile" uid="uid://cyxhh7ddkn62q" path="res://fonts/Montserrat-Medium.ttf" id="4_lquwl"]
+[ext_resource type="Script" uid="uid://ua8l7shpunl" path="res://UserInterface.cs" id="5_7mycd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(60, 1, 60)
@@ -23,6 +25,10 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
+
+[sub_resource type="Theme" id="Theme_272bh"]
+default_font = ExtResource("4_lquwl")
+default_font_size = 22
 
 [node name="Main" type="Node" unique_id=1635115187]
 script = ExtResource("1_0xm2m")
@@ -81,4 +87,22 @@ transform = Transform3D(-0.0028089685, 0, -0.99999607, 0, 1, 0, 0.99999607, 0, -
 wait_time = 0.5
 autostart = true
 
+[node name="UserInterface" type="Control" parent="." unique_id=652053385]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_272bh")
+script = ExtResource("5_7mycd")
+
+[node name="Label" type="Label" parent="UserInterface" unique_id=1886287093]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 32.0
+offset_right = 408.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Score: 0"
+
+[connection signal="Hit" from="Player" to="." method="OnPlayerHit"]
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]
