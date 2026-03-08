@@ -26,7 +26,7 @@ public partial class Mob : CharacterBody3D
 	{
 		// We want the mob to look at the player on the same Y level, 
 		// so we set the Y value of the player position to be the same as the mob's start position.
-		playerPosition.Y = startPosition.Y; 
+		playerPosition.Y = startPosition.Y;
 
 		// We position the mob by placing it at startPosition
 		// and rotate it towards playerPosition, so it looks at the player.
@@ -42,6 +42,8 @@ public partial class Mob : CharacterBody3D
 		// We then rotate the velocity vector based on the mob's Y rotation
 		// in order to move in the direction the mob is looking.
 		Velocity = Velocity.Rotated(Vector3.Up, Rotation.Y);
+		
+		GetNode<AnimationPlayer>("AnimationPlayer").SpeedScale = randomSpeed / MinSpeed;
 	}
 
 	public void Squash()

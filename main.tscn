@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ceuu150fmggvr" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://defdm2qdva75q" path="res://mob.tscn" id="2_h2yge"]
 [ext_resource type="FontFile" uid="uid://cyxhh7ddkn62q" path="res://fonts/Montserrat-Medium.ttf" id="4_lquwl"]
-[ext_resource type="Script" uid="uid://ua8l7shpunl" path="res://UserInterface.cs" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://b6yqacnxiq0jo" path="res://ScoreLabel.cs" id="5_lquwl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(60, 1, 60)
@@ -26,7 +26,7 @@ _data = {
 }
 point_count = 4
 
-[sub_resource type="Theme" id="Theme_272bh"]
+[sub_resource type="Theme" id="Theme_1bvp3"]
 default_font = ExtResource("4_lquwl")
 default_font_size = 22
 
@@ -87,22 +87,48 @@ transform = Transform3D(-0.0028089685, 0, -0.99999607, 0, 1, 0, 0.99999607, 0, -
 wait_time = 0.5
 autostart = true
 
-[node name="UserInterface" type="Control" parent="." unique_id=652053385]
+[node name="UserInterface" type="Control" parent="." unique_id=2069621448]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme = SubResource("Theme_272bh")
-script = ExtResource("5_7mycd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_1bvp3")
 
-[node name="Label" type="Label" parent="UserInterface" unique_id=1886287093]
+[node name="ScoreLabel" type="Label" parent="UserInterface" unique_id=240515339]
 layout_mode = 0
-offset_left = 320.0
-offset_top = 32.0
-offset_right = 408.0
-offset_bottom = 60.0
+offset_left = 14.0
+offset_top = 16.0
+offset_right = 102.0
+offset_bottom = 44.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Score: 0"
+script = ExtResource("5_lquwl")
+
+[node name="Retry" type="ColorRect" parent="UserInterface" unique_id=539049187]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.16078432)
+
+[node name="Label" type="Label" parent="UserInterface/Retry" unique_id=516754642]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.5
+offset_top = -14.0
+offset_right = 107.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press Enter to retry"
 
 [connection signal="Hit" from="Player" to="." method="OnPlayerHit"]
 [connection signal="timeout" from="MobTimer" to="." method="OnMobTimerTimeout"]

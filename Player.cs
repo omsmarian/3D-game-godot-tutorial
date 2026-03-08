@@ -28,7 +28,9 @@ public partial class Player : CharacterBody3D
 	{
 		// We create a local variable to store the input direction.
 		var direction = Vector3.Zero;
-
+		
+		var pivot = GetNode<Node3D>("Pivot");
+		
 		// We check for each move input and update the direction accordingly.
 		if (Input.IsActionPressed("move_right"))
 		{
@@ -53,7 +55,12 @@ public partial class Player : CharacterBody3D
 		{
 			direction = direction.Normalized();
 			// Setting the basis property will affect the rotation of the node.
-			GetNode<Node3D>("Pivot").Basis = Basis.LookingAt(direction);
+			pivot.Basis = Basis.LookingAt(direction);
+			GetNode<AnimationPlayer>("AnimationPlayer").SpeedScale = 4;
+		}
+		else
+		{
+			GetNode<AnimationPlayer>("AnimationPlayer").SpeedScale = 1;
 		}
 
 		// Ground velocity
@@ -92,6 +99,8 @@ public partial class Player : CharacterBody3D
 				}
 			}
 		}
+
+		pivot.Rotation = new Vector3(Mathf.Pi / 6.0f * Velocity.Y / JumpImpulse, pivot.Rotation.Y, pivot.Rotation.Z);
 
 		// Moving the character
 		Velocity = _targetVelocity;
